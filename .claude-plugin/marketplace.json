@@ -1,0 +1,17 @@
+{
+  "name": "pipe0",
+  "description": "The pipe0 plugin for Claude Code.",
+  "owner": {
+    "name": "pipe0",
+    "url": "https://pipe0.com"
+  },
+  "plugins": [
+    {
+      "name": "pipe0",
+      "source": "./",
+      "description": "Find and enrich B2B leads, catch intent signals as they happen, and turn them into sales automations that run in the cloud.",
+      "homepage": "https://pipe0.com/docs/sdks/mcp",
+      "category": "productivity"
+    }
+  ]
+}

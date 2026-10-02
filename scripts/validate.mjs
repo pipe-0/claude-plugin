@@ -5,12 +5,14 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const repo = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+// The directory scans only the plugin folder (its plugin path), so every directory rule applies there.
+const root = join(repo, "pipe0");
 const errors = [];
 const fail = (msg) => errors.push(msg);
-const readJson = (rel) => {
+const readJson = (rel, base = root) => {
   try {
-    return JSON.parse(readFileSync(join(root, rel), "utf8"));
+    return JSON.parse(readFileSync(join(base, rel), "utf8"));
   } catch (e) {
     fail(`${rel}: ${e.message}`);
     return null;
@@ -21,7 +23,7 @@ const SEMVER_RE = /^\d+\.\d+\.\d+$/;
 const MCP_URL = "https://api.pipe0.com/v1/mcp";
 
 const m = readJson(".claude-plugin/plugin.json");
-const market = readJson(".claude-plugin/marketplace.json");
+const market = readJson(".claude-plugin/marketplace.json", repo);
 const mcp = readJson(".mcp.json");
 
 if (m) {
@@ -36,7 +38,7 @@ if (m) {
 if (market) {
   const entry = market.plugins?.find((p) => p.name === m?.name);
   if (!entry) fail("marketplace.json: no entry for the plugin");
-  else if (entry.source !== "./") fail('marketplace.json: the plugin source must be "./"');
+  else if (entry.source !== "./pipe0") fail('marketplace.json: the plugin source must be "./pipe0"');
 }
 
 if (mcp) {
@@ -50,7 +52,7 @@ if (mcp) {
   }
 }
 
-const changelog = existsSync(join(root, "CHANGELOG.md")) ? readFileSync(join(root, "CHANGELOG.md"), "utf8") : "";
+const changelog = existsSync(join(repo, "CHANGELOG.md")) ? readFileSync(join(repo, "CHANGELOG.md"), "utf8") : "";
 if (m?.version && !changelog.includes(`## ${m.version}`)) fail(`CHANGELOG.md has no entry for ${m.version}`);
 for (const f of ["README.md", "LICENSE", "skills/pipe0/SKILL.md"]) if (!existsSync(join(root, f))) fail(`${f} is missing`);
 
@@ -82,6 +84,11 @@ if (files > 512) fail(`${files} files (max 512)`);
 
 const readme = readFileSync(join(root, "README.md"), "utf8").replace(/```[\s\S]*?```/g, "");
 if (readme.split(/\s+/).filter(Boolean).length < 40) fail("README.md needs at least 40 words outside code blocks");
+
+// The directory lints the plugin README as user-facing text: no shell commands to run, no credential handling.
+const readmeRaw = readFileSync(join(root, "README.md"), "utf8");
+if (/```/.test(readmeRaw)) fail("pipe0/README.md: keep code blocks (install or dev commands) in the root README");
+if (/bearer|authorization:/i.test(readmeRaw)) fail("pipe0/README.md: don't describe how credentials are sent");
 
 if (errors.length) {
   console.error("pipe0 plugin validation failed:\n" + errors.map((e) => `  - ${e}`).join("\n"));

@@ -17,6 +17,6 @@ jobs:
         run: node scripts/validate.mjs
       - name: Claude Code plugin validation
         run: |
-          npx -y @anthropic-ai/claude-code@latest plugin validate .claude-plugin/plugin.json --strict
+          npx -y @anthropic-ai/claude-code@latest plugin validate pipe0/.claude-plugin/plugin.json --strict
           npx -y @anthropic-ai/claude-code@latest plugin validate .claude-plugin/marketplace.json --strict
-          npx -y @anthropic-ai/claude-code@latest plugin validate skills --strict
+          npx -y @anthropic-ai/claude-code@latest plugin validate pipe0/skills --strict

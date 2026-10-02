@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "pipe0",
-      "source": "./",
+      "source": "./pipe0",
       "description": "GTM data for agents. Build and enrich lead lists, watch for buying signals like job changes and hiring.",
       "homepage": "https://pipe0.com/docs/sdks/mcp",
       "category": "productivity"

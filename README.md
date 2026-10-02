@@ -2,7 +2,13 @@
 
 ![pipe0](assets/logo.png)
 
-Connect Claude to [pipe0](https://pipe0.com): search for people and companies, enrich them with work emails, phone numbers, and LinkedIn data, and operate pipe0 Sheets, schedules, and reports from Claude, Cowork, and Claude Code.
+[pipe0](https://pipe0.com) gives your agent GTM data: verified emails, phone numbers, firmographics, and more. Build targeted lead lists and enrich them from dozens of providers, all from chat.
+
+Then keep them working:
+
+- **Watch for signals:** job changes, funding and company news, new hires, email replies, booked meetings, and custom webhook events.
+- **Act automatically:** enrich, score, and route each lead to HubSpot, Salesforce, Attio, or Slack.
+- **Keep everything in one place:** save lists to pipe0 sheets, schedule recurring runs, and pick up where you left off in any chat.
 
 The plugin has two parts:
 

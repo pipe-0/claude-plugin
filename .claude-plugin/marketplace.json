@@ -9,7 +9,7 @@
     {
       "name": "pipe0",
       "source": "./",
-      "description": "Find and enrich B2B leads, catch intent signals as they happen, and turn them into sales automations that run in the cloud.",
+      "description": "GTM data for agents. Build and enrich lead lists, watch for buying signals like job changes and hiring.",
       "homepage": "https://pipe0.com/docs/sdks/mcp",
       "category": "productivity"
     }

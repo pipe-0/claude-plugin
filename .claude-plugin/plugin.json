@@ -2,13 +2,14 @@
   "name": "pipe0",
   "displayName": "pipe0",
   "version": "1.0.0",
-  "description": "Find and enrich B2B leads, catch intent signals as they happen, and turn them into sales automations that run in the cloud. Sign in with your pipe0 account on first connect.",
+  "description": "GTM data for agents. Build and enrich lead lists, watch for buying signals like job changes and hiring.",
   "author": {
     "name": "Florian Martens",
     "url": "https://github.com/florianmartens"
   },
   "homepage": "https://pipe0.com/docs/sdks/mcp",
   "repository": "https://github.com/pipe-0/claude-plugin",
+  "privacyPolicyUrl": "https://www.pipe0.com/resources/legal/privacy-policy",
   "license": "MIT",
   "keywords": [
     "pipe0",
